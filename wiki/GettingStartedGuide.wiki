@@ -26,6 +26,7 @@ IMPORTANT: Your Secret Access Key is a secret, which only you and your Zend Serv
 
 == View Your Zend Web API Security Credentials==
 To view your security credentials, hit the "Show full key" button
+
 [http://farm6.static.flickr.com/5134/5520057806_b04f02c449_b.jpg]
 
 == Using the Zend Web API SDK for Java == 
@@ -49,8 +50,7 @@ Select all jars located under the "lib" directory of the Java SDK, then click Ne
 /**
  * Create the credential object
  */
-WebApiCredentials credentials = new BasicCredentials(KEY_NAME,
-				SECRET_KEY);
+WebApiCredentials credentials = new BasicCredentials(KEY_NAME, SECRET_KEY);
 
 /**
  * Creates the Web API client object
@@ -65,8 +65,7 @@ SystemInfo systemInfo = webApiClient.getSystemInfo();
 /**
  * Print license info from retrieved system info
  */
-System.out.println("License order number:"
-		+ systemInfo.getLicenseInfo().getOrderNumber());
+System.out.println("License order number:" + systemInfo.getLicenseInfo().getOrderNumber());
 
 }}}
 
