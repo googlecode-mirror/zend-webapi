@@ -24,12 +24,12 @@ Secret Access Key (for example: 748a34361ad65b4ed15c76d13859a94f621c60bcf2a3fe1c
 
 IMPORTANT: Your Secret Access Key is a secret, which only you and your Zend Server should know. It is important to keep it confidential to protect your account. Store it securely in a safe place. Never include it in your requests, and never e-mail it to anyone. Do not share it outside your organization, even if an inquiry appears to come from anyone at Zend. No one who legitimately represents Zend will ever ask you for your Secret Access Key.
 
-== View Your Zend Web API Security Credentials==
+== 3. View Your Zend Web API Security Credentials==
 To view your security credentials, hit the "Show full key" button
 
 [http://farm6.static.flickr.com/5134/5520057806_b04f02c449_b.jpg]
 
-== Using the Zend Web API SDK for Java == 
+== 4. Using the Zend Web API SDK for Java == 
 Download the Zend Web API SDK for Java from the SDK web page at [http://code.google.com/p/zend-webapi/ zend-webapi project]. After downloading the SDK, extract the contents into a folder.
 
 The SDK /samples folder includes a number of code samples:
@@ -38,7 +38,7 @@ GetInfo sample — Demonstrates how to make a request to get information service
 
 ServersListing sample — Demonstrates how to use the basic features for listing servers and their status.
 
-==To run a sample==
+== 5. To run a sample==
 
  # To add the SDK to an existing Eclipse project
 Right-click the project in the Project Explorer, then select Build Path -> Add Libraries....
