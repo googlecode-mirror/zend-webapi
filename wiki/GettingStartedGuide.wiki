@@ -1,7 +1,7 @@
 #summary a Getting Started Guide
 
 = A Getting Started Guide =
-This guide introduces the Zend Server SDK for Java and provides a walk-through for getting started using the SDK.
+This guide introduces the Zend Server Web API SDK for Java and provides a walk-through for getting started using the SDK.
 The Zend Web API SDK for Java provides a Java API for Zend Server infrastructure services. Using the SDK, you can automate and configure your PHP Web Applications servers to build applications on top of Zend Server. The Zend Web API SDK for Java includes:
 
  # Zend Web API Java Library—Build Java applications on top of APIs to take the complexity out of coding directly against a web service interface. The library provides APIs that hide much of the lower-level plumbing, including authentication, request retries, and error handling.
