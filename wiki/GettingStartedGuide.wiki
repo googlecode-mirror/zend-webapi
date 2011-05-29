@@ -1,4 +1,5 @@
 #summary a Getting Started Guide
+#labels Featured
 
 = A Getting Started Guide =
 This guide introduces the Zend Server Web API SDK for Java and provides a walk-through for getting started using the SDK.
