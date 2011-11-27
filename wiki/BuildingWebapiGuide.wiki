@@ -20,7 +20,7 @@ Here are steps to build webapi:
   * ant variable gradle.home (you can add it on Properties tab in Preferences->Ant->Runtime).
  # Build project in Eclipse.
 
-After those two steps project is ready for development. The main script for building webapi is build.gradle.
+After those steps project is ready for development. The main script for building webapi is build.gradle.
 
 Here is a list of task which are available for this project:
 
