@@ -21,6 +21,31 @@ Here are steps to build webapi:
  # Build project in Eclipse.
 
 After those two steps project is ready for development. The main script for building webapi is build.gradle.
-To create binary or source package one of the following task must be performed:
- * createBinPackage
- * createSrcPackage
+
+Here is a list of task which are available for this project:
+
+*Build tasks*
+ * assemble - Assembles jar archive (available in {project_root}/build/libs).
+ * build - Assembles and tests this project.
+ * buildDependents - Assembles and tests this project and all projects that depend on it.
+ * buildNeeded - Assembles and tests this project and all projects it depends on.
+ * classes - Assembles the main classes (available in {project_root}/build/classes).
+ * clean - Deletes the build directory.
+ * jar - Assembles a jar archive containing the main classes (available in {project_root}/build/libs).
+ * testClasses - Assembles the test classes (available in {project_root}/build/classes).
+
+*Documentation tasks*
+ * javadoc - Generates Javadoc API documentation for the main source code (available in {project_root}/build/docs/javadoc)
+
+*Verification tasks*
+check - Runs all checks.
+test - Runs the unit tests with Emma code coverage (results available in {project_root}/build/reports). 
+
+
+*Other tasks*
+ * createBinPackage - create binary package (available in {project_root}/build/distributions/).
+ * createJavadocJar - Assembles jar with javadoc (available in {project_root}/build/libs/).
+ * createSourceJar - Assembles jar with sources (available in {project_root}/build/libs/).
+ * createSrcPackage - create source package (available in {project_root}/build/distributions/).
+ * createTestJar - Assembles jar with tests (available in {project_root}/build/libs/).
+
