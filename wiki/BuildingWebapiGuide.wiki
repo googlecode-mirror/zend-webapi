@@ -1,0 +1,26 @@
+#summary How to build webapi step by step guide
+
+= Introduction =
+
+This document describes how to build webapi project using its sources.
+
+
+= Details =
+
+Before webapi can be build following requirements must be satisfied:
+ * Gradle is available. If you do not have it installed yet go to http://www.gradle.org/downloads and download the newest version. Then follow installation steps from http://www.gradle.org/installation.
+ * Eclipse IDE for Java Developers or any other Eclipse with JDT installed.
+ * SVN client.
+
+Here are steps to build webapi:
+ # Run Eclipse.
+ # Checkout webapi code from repository (details at http://code.google.com/p/zend-webapi/source/checkout) to your workspace.
+ # On of the following variables must be set before build is performed:
+  * system environment GRADLE_HOME,
+  * ant variable gradle.home (you can add it on Properties tab in Preferences->Ant->Runtime).
+ # Build project in Eclipse.
+
+After those two steps project is ready for development. The main script for building webapi is build.gradle.
+To create binary or source package one of the following task must be performed:
+ * createBinPackage
+ * createSrcPackage
