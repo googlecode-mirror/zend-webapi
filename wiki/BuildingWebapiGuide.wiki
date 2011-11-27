@@ -38,8 +38,8 @@ Here is a list of task which are available for this project:
  * javadoc - Generates Javadoc API documentation for the main source code (available in {project_root}/build/docs/javadoc)
 
 *Verification tasks*
-check - Runs all checks.
-test - Runs the unit tests with Emma code coverage (results available in {project_root}/build/reports). 
+ * check - Runs all checks.
+ * test - Runs the unit tests with Emma code coverage (results available in {project_root}/build/reports). 
 
 
 *Other tasks*
@@ -48,4 +48,3 @@ test - Runs the unit tests with Emma code coverage (results available in {projec
  * createSourceJar - Assembles jar with sources (available in {project_root}/build/libs/).
  * createSrcPackage - create source package (available in {project_root}/build/distributions/).
  * createTestJar - Assembles jar with tests (available in {project_root}/build/libs/).
-
