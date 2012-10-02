@@ -38,6 +38,7 @@ import org.zend.webapi.core.connection.data.ServerInfo;
 import org.zend.webapi.core.connection.data.ServersList;
 import org.zend.webapi.core.connection.data.SystemInfo;
 import org.zend.webapi.core.connection.data.values.IssueStatus;
+import org.zend.webapi.core.connection.data.values.ServerType;
 import org.zend.webapi.core.connection.data.values.WebApiVersion;
 import org.zend.webapi.core.connection.dispatch.IServiceDispatcher;
 import org.zend.webapi.core.connection.request.IRequest;
@@ -123,6 +124,7 @@ public class WebApiClient {
 	private IChangeNotifier notifier;
 
 	private boolean listenersDisabled;
+	private ServerType serverType;
 
 	private static Map<IRequestListener, Integer> preListeners;
 	private static Map<IRequestListener, Integer> postListeners;
@@ -1546,7 +1548,7 @@ public class WebApiClient {
 				new Date(), this.credentials.getKeyName(),
 				this.clientConfiguration.getUserAgent(),
 				getWebApiAddress(this.clientConfiguration.getHost()),
-				this.credentials.getSecretKey());
+				this.credentials.getSecretKey(), getServerType());
 
 		if (initializer != null) {
 			initializer.init(request);
@@ -1584,6 +1586,10 @@ public class WebApiClient {
 
 	public void enableListeners() {
 		listenersDisabled = false;
+	}
+
+	public void setServerType(ServerType serverType) {
+		this.serverType = serverType;
 	}
 
 	public static void registerPreRequestListener(IRequestListener listener) {
@@ -1640,6 +1646,13 @@ public class WebApiClient {
 				}
 			}
 		}
+	}
+
+	private ServerType getServerType() {
+		if (serverType == null) {
+			return ServerType.ZEND_SERVER_MANAGER;
+		}
+		return serverType;
 	}
 
 	private final String getWebApiAddress(URL host) {
