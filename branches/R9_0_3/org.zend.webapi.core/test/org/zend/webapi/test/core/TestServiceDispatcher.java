@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 import org.zend.webapi.core.WebApiException;
+import org.zend.webapi.core.connection.data.values.ServerType;
 import org.zend.webapi.core.connection.data.values.WebApiVersion;
 import org.zend.webapi.core.connection.request.IRequest;
 import org.zend.webapi.core.connection.response.IResponse;
@@ -53,7 +54,7 @@ public class TestServiceDispatcher extends AbstractTestServer {
 		IRequest simpleRequest = new GetSystemInfoRequest(WebApiVersion.V1,
 				Calendar.getInstance().getTime(), Configuration.getKeyName(),
 				"userAgent", Configuration.getHost(),
-				Configuration.getSecretKey());
+				Configuration.getSecretKey(), ServerType.ZEND_SERVER_MANAGER);
 		ServiceDispatcher dispatcher = new ServiceDispatcher();
 		IResponse response = dispatcher.dispatch(simpleRequest);
 		Assert.assertNotNull(response);
@@ -71,7 +72,7 @@ public class TestServiceDispatcher extends AbstractTestServer {
 		IRequest simpleRequest = new GetSystemInfoRequest(WebApiVersion.V1,
 				Calendar.getInstance().getTime(), Configuration.getKeyName(),
 				"userAgent", Configuration.getHost(),
-				Configuration.getSecretKey());
+				Configuration.getSecretKey(), ServerType.ZEND_SERVER);
 		ServiceDispatcher dispatcher = new SimpleServiceDispatcher();
 		dispatcher.dispatch(simpleRequest);
 	}
@@ -82,7 +83,7 @@ public class TestServiceDispatcher extends AbstractTestServer {
 		IRequest simpleRequest = new GetSystemInfoRequest(WebApiVersion.V1,
 				Calendar.getInstance().getTime(), Configuration.getKeyName(),
 				"userAgent", Configuration.getHost(),
-				Configuration.getSecretKey());
+				Configuration.getSecretKey(), ServerType.ZEND_SERVER);
 		ServiceDispatcher dispatcher = new SimpleServiceDispatcher2();
 		dispatcher.dispatch(simpleRequest);
 	}

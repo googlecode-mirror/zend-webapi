@@ -18,6 +18,7 @@ import org.zend.webapi.core.connection.data.ServerConfig;
 import org.zend.webapi.core.connection.data.ServerInfo;
 import org.zend.webapi.core.connection.data.ServersList;
 import org.zend.webapi.core.connection.data.SystemInfo;
+import org.zend.webapi.core.connection.data.values.ServerType;
 import org.zend.webapi.core.connection.data.values.WebApiVersion;
 import org.zend.webapi.core.connection.request.IRequest;
 import org.zend.webapi.core.connection.response.IResponse;
@@ -44,7 +45,7 @@ public class TestResponse {
 			MalformedURLException {
 		IRequest simpleRequest = new GetSystemInfoRequest(WebApiVersion.V1,
 				Calendar.getInstance().getTime(), "key", "userAgent",
-				"http://localhost", "secretKey");
+				"http://localhost", "secretKey", ServerType.ZEND_SERVER);
 		IResponseData data = new SimpleResponseData(ResponseType.SYSTEM_INFO,
 				"prefix");
 		IResponse response = ResponseFactory.createResponse(simpleRequest,
