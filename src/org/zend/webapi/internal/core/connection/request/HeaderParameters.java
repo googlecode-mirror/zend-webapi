@@ -18,6 +18,11 @@ import org.restlet.util.Series;
  */
 public class HeaderParameters extends Series<Parameter> {
 
+
+	public HeaderParameters() {
+		super(Parameter.class);
+	}
+
 	@Override
 	public Parameter createEntry(String name, String value) {
 		return Parameter.create(name, value);
