@@ -29,3 +29,5 @@ Export-Package: org.zend.webapi.test,
  org.zend.webapi.test.server,
  org.zend.webapi.test.server.response,
  org.zend.webapi.test.server.utils
+Bundle-ClassPath: .,
+ bin/
