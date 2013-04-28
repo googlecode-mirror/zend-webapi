@@ -1,13 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.zend</groupId>
 	<artifactId>org.zend.webapi</artifactId>
 	<version>0.0.23-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
-	<properties>
-		<tycho-version>0.17.0</tycho-version>
-	</properties>
+	<parent>
+		<groupId>com.zend</groupId>
+		<artifactId>org.zend.webapi.releng</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../org.zend.webapi.releng</relativePath>
+	</parent>
+	
 
 	<repositories>
 		<repository>
@@ -26,10 +29,10 @@
 			<url>https://oss.sonatype.org/content/groups/public/</url>
 		</repository>
 		<repository>
-	<id>orbit</id>
-	<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20130118183705/repository/</url>
-	<layout>p2</layout>
-</repository>
+			<id>orbit</id>
+			<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20130118183705/repository/</url>
+			<layout>p2</layout>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -69,24 +72,18 @@
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-maven-plugin</artifactId>
+				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
-				<extensions>true</extensions>
+				<configuration>
+					<pomDependencies>consider</pomDependencies>
+					<artifact>
+						<groupId>org.mockito</groupId>
+						<artifactId>mockito-all</artifactId>
+						<version>1.8.5</version>
+						<classifier>jar</classifier>
+					</artifact>
+				</configuration>
 			</plugin>
-			 <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho-version}</version>
-        <configuration>
-          <pomDependencies>consider</pomDependencies>
-          <artifact> 
-                <groupId>org.mockito</groupId> 
-                <artifactId>mockito-all</artifactId> 
-                <version>1.8.5</version>
-                <classifier>jar</classifier> 
-            </artifact> 
-        </configuration>
-      </plugin>
 		</plugins>
 	</build>
 	<!-- build> <sourceDirectory>${project.basedir}/src</sourceDirectory> <testSourceDirectory>${project.basedir}/test</testSourceDirectory> 

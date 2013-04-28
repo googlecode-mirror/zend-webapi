@@ -3,15 +3,16 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tests
 Bundle-SymbolicName: org.zend.webapi.tests
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.zend.webapi.tests.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.zend.webapi;bundle-version="0.0.23",
+Require-Bundle: org.zend.webapi,
  org.mockito;bundle-version="1.8.4",
- org.junit;bundle-version="4.10.0"
-Bundle-ActivationPolicy: lazy
+ org.junit
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.restlet,
+Import-Package: org.hamcrest;core=split;version="1.1.0",
+ org.hamcrest.core;version="1.1.0",
+ org.hamcrest.internal;version="1.1.0",
+ org.junit,
+ org.junit.runner;version="4.10.0",
+ org.restlet,
  org.restlet.data,
  org.restlet.engine.io,
  org.restlet.ext.xml,
