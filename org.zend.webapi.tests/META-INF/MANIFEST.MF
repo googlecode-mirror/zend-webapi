@@ -20,3 +20,12 @@ Import-Package: org.hamcrest;core=split;version="1.1.0",
  org.restlet.resource,
  org.restlet.routing,
  org.restlet.util
+Export-Package: org.zend.webapi.test,
+ org.zend.webapi.test.connection,
+ org.zend.webapi.test.connection.data,
+ org.zend.webapi.test.connection.services,
+ org.zend.webapi.test.core,
+ org.zend.webapi.test.core.progress,
+ org.zend.webapi.test.server,
+ org.zend.webapi.test.server.response,
+ org.zend.webapi.test.server.utils

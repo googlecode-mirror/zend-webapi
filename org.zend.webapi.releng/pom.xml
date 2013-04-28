@@ -16,6 +16,7 @@
 		<module>../org.zend.webapi.update-site</module>
 		<module>../org.zend.webapi.tests</module>
 		<module>../org.zend.webapi.feature</module>
+		<module>../org.zend.webapi.tests.feature</module>
 		<module>../org.zend.webapi.buildtarget</module>
 	</modules>
 

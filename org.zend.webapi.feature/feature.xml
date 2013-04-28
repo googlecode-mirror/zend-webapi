@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.zend.webapi.feature"
+      id="org.zend.webapi.tests.feature"
       label="Feature"
       version="1.0.0.qualifier">
 
@@ -17,21 +17,7 @@
    </license>
 
    <plugin
-         id="org.zend.webapi"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
-    <plugin
-         id="org.restlet"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
-       <plugin
-         id="org.restlet.ext.xml"
+         id="org.zend.webapi.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
