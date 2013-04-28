@@ -52,4 +52,5 @@ Export-Package: org.zend.webapi.core;
    org.zend.webapi.core.connection.data.values"
 Bundle-ClassPath: .
 Require-Bundle: org.restlet.ext.xml,
- org.restlet
+ org.restlet,
+ org.eclipse.osgi;bundle-version="3.8.2"
