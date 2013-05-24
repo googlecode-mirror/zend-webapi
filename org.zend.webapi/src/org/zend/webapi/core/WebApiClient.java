@@ -32,6 +32,8 @@ import org.zend.webapi.core.connection.data.Issue;
 import org.zend.webapi.core.connection.data.IssueDetails;
 import org.zend.webapi.core.connection.data.IssueFile;
 import org.zend.webapi.core.connection.data.IssueList;
+import org.zend.webapi.core.connection.data.LibraryFile;
+import org.zend.webapi.core.connection.data.LibraryList;
 import org.zend.webapi.core.connection.data.ProfileRequest;
 import org.zend.webapi.core.connection.data.RequestSummary;
 import org.zend.webapi.core.connection.data.ServerConfig;
@@ -72,6 +74,11 @@ import org.zend.webapi.internal.core.connection.request.CodeTracingEnableRequest
 import org.zend.webapi.internal.core.connection.request.CodeTracingListRequest;
 import org.zend.webapi.internal.core.connection.request.CodetracingDownloadTraceFileRequest;
 import org.zend.webapi.internal.core.connection.request.ConfigurationImportRequest;
+import org.zend.webapi.internal.core.connection.request.DownloadLibraryVersionFileRequest;
+import org.zend.webapi.internal.core.connection.request.LibraryGetStatusRequest;
+import org.zend.webapi.internal.core.connection.request.LibrarySynchronizeRequest;
+import org.zend.webapi.internal.core.connection.request.LibraryVersionDeployRequest;
+import org.zend.webapi.internal.core.connection.request.LibraryVersionGetStatusRequest;
 import org.zend.webapi.internal.core.connection.request.MonitorChangeIssueStatusRequest;
 import org.zend.webapi.internal.core.connection.request.MonitorExportIssueByEventsGroupRequest;
 import org.zend.webapi.internal.core.connection.request.MonitorGetEventGroupDetailsRequest;
@@ -1607,6 +1614,127 @@ public class WebApiClient {
 	}
 	
 	/**
+	 * Get the list of libraries currently deployed on the server or the cluster
+	 * and information about each library’s available versions. If library IDs
+	 * are specified, will return information about the specified applications;
+	 * If no IDs are specified, will return information about all libraries.
+	 * 
+	 * @see WebApiMethodType#LIBRARY_GET_STATUS
+	 * 
+	 * @return libraries list
+	 * @throws WebApiException
+	 * @since 1.5
+	 */
+	public LibraryList libraryGetStatus(final String... libraries)
+			throws WebApiException {
+		final IResponse handle = this.handle(
+				WebApiMethodType.LIBRARY_GET_STATUS,
+				getVersion(WebApiVersion.V1_5), libraries.length == 0 ? null
+						: new IRequestInitializer() {
+							public void init(IRequest request)
+									throws WebApiException {
+								((LibraryGetStatusRequest) request)
+										.setLibraries(libraries);
+							}
+						});
+		return (LibraryList) handle.getData();
+	}
+	
+	/**
+	 * Get the library version id that is deployed on the server or the cluster
+	 * and information about that version and its library.
+	 * 
+	 * @see WebApiMethodType#LIBRARY_VERSION_GET_STATUS
+	 * 
+	 * @return libraries list
+	 * @throws WebApiException
+	 * @since 1.5
+	 */
+	public LibraryList libraryVersionGetStatus(final int id)
+			throws WebApiException {
+		final IResponse handle = this.handle(
+				WebApiMethodType.LIBRARY_VERSION_GET_STATUS,
+				getVersion(WebApiVersion.V1_5), new IRequestInitializer() {
+					public void init(IRequest request) throws WebApiException {
+						((LibraryVersionGetStatusRequest) request)
+								.setLibraryId(id);
+					}
+				});
+		return (LibraryList) handle.getData();
+	}
+	
+	/**
+	 * Deploy a new library version to the server or cluster. This process is
+	 * asynchronous – the initial request will wait until the library is
+	 * uploaded and verified, and the initial response will show information
+	 * about the library being deployed – however the staging and activation
+	 * process will proceed after the response is returned. The user is expected
+	 * to continue checking the library version status using the
+	 * libraryVersionGetStatus method until the deployment process is complete.
+	 * 
+	 * @return information about deployed library
+	 * @throws WebApiException
+	 * @since 1.5
+	 */
+	public LibraryList libraryVersionDeploy(final NamedInputStream libPackage)
+			throws WebApiException {
+		final IResponse handle = this.handle(
+				WebApiMethodType.LIBRARY_VERSION_DEPLOY,
+				getVersion(WebApiVersion.V1_5), new IRequestInitializer() {
+
+					public void init(IRequest request) throws WebApiException {
+						LibraryVersionDeployRequest deployRequest = (LibraryVersionDeployRequest) request;
+						deployRequest.setLibPackage(libPackage);
+						deployRequest.setNotifier(notifier);
+					}
+				});
+		return (LibraryList) handle.getData();
+	}
+	
+	/**
+	 * @return information about synchronized library
+	 * @throws WebApiException
+	 * @since 1.5
+	 */
+	public LibraryList librarySynchronize(final int libraryVersionId,
+			final NamedInputStream libPackage) throws WebApiException {
+		final IResponse handle = this.handle(
+				WebApiMethodType.LIBRARY_SYNCHRONIZE,
+				getVersion(WebApiVersion.V1_5), new IRequestInitializer() {
+
+					public void init(IRequest request) throws WebApiException {
+						LibrarySynchronizeRequest synchRequest = (LibrarySynchronizeRequest) request;
+						synchRequest.setLibPackage(libPackage);
+						synchRequest.setLibraryVersionId(libraryVersionId);
+						synchRequest.setNotifier(notifier);
+					}
+				});
+		return (LibraryList) handle.getData();
+	}
+	
+	/**
+	 * Download the zpk file specified by library version identifier.
+	 * 
+	 * @see WebApiMethodType#DOWNLOAD_LIBRARY_VERSION_FILE
+	 * 
+	 * @return LibraryFile
+	 * @throws WebApiException
+	 * @since 1.5
+	 */
+	public LibraryFile downloadLibraryVersionFile(final int libVersionId)
+			throws WebApiException {
+		final IResponse handle = this.handle(
+				WebApiMethodType.DOWNLOAD_LIBRARY_VERSION_FILE,
+				getVersion(WebApiVersion.V1_5), new IRequestInitializer() {
+					public void init(IRequest request) throws WebApiException {
+						((DownloadLibraryVersionFileRequest) request)
+								.setLibVersionId(libVersionId);
+					}
+				});
+		return (LibraryFile) handle.getData();
+	}
+
+	/**
 	 * Zend Server Web API is intended to allow automation of the management and
 	 * deployment of Zend Server and Zend Server Cluster Manager, and allow
 	 * integration with other Zend or 3rd party software. Call a specific
@@ -1754,7 +1882,8 @@ public class WebApiClient {
 	}
 	
 	private WebApiVersion getVersion(WebApiVersion preferedVersion) {
-		if (customVersion != null && customVersion != WebApiVersion.UNKNOWN) {
+		if (customVersion != null && customVersion != WebApiVersion.UNKNOWN
+				&& customVersion.compareTo(preferedVersion) > 0) {
 			return customVersion;
 		}
 		return preferedVersion;

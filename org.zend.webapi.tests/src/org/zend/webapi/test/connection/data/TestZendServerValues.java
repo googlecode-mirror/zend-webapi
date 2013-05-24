@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.zend.webapi.test.connection.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.zend.webapi.core.connection.data.values.ZendServerVersion;

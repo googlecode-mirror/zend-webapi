@@ -1,7 +1,5 @@
 package org.zend.webapi.test.connection.services;
 
-import static org.junit.Assert.fail;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,8 +7,9 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 import org.zend.webapi.core.WebApiException;
 import org.zend.webapi.core.connection.data.ApplicationInfo;
@@ -107,7 +106,6 @@ public class TestDeploymentServices extends AbstractTestServer {
 	@Test
 	public void testApplicationGetStatus() throws WebApiException,
 			MalformedURLException, FileNotFoundException {
-		
 		deployApplication();
 		initMock(handler.applicationGetStatus(), "applicationGetStatus",
 				ResponseCode.OK);

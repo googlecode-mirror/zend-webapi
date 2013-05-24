@@ -1,6 +1,8 @@
 package org.zend.webapi.test.core.progress;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 import org.zend.webapi.core.progress.StatusCode;

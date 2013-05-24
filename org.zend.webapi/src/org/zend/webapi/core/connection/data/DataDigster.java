@@ -72,7 +72,7 @@ public class DataDigster extends GenericResponseDataVisitor {
 	public DataDigster(IRequest request, Representation representation) {
 		this(create(request), representation);
 	}
-	
+
 	/**
 	 * Validate XML or amf file representation.
 	 * 
@@ -878,8 +878,7 @@ public class DataDigster extends GenericResponseDataVisitor {
 			byte[] buffer = new byte[8192];
 			int count = 0;
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			while ((count = reader.read(buffer)) > 0)
-			{
+			while ((count = reader.read(buffer)) > 0) {
 				out.write(buffer, 0, count);
 			}
 			codeTraceFile.setFileSize(out.size());
@@ -965,6 +964,153 @@ public class DataDigster extends GenericResponseDataVisitor {
 		return true;
 	}
 
+	@Override
+	public boolean preVisit(LibraryVersion libraryVersion) {
+		String currentPath = libraryVersion.getPrefix();
+		int occurrence = libraryVersion.getOccurrence();
+		String value = getValue(currentPath + "/libraryVersionId", occurrence);
+		libraryVersion.setLibraryVersionId(Integer.valueOf(value));
+		value = getValue(currentPath + "/version", occurrence);
+		libraryVersion.setVersion(value);
+		value = getValue(currentPath + "/installedLocation", occurrence);
+		libraryVersion.setInstalledLocation(value);
+		value = getValue(currentPath + "/creationTime", occurrence);
+		libraryVersion.setCreationTime(value);
+		value = getValue(currentPath + "/creationTimeTimestamp", occurrence);
+		libraryVersion.setCreationTimeTimestamp(value);
+		value = getValue(currentPath + "/lastUsed", occurrence);
+		libraryVersion.setLastUsed(value);
+		value = getValue(currentPath + "/lastUsedTimeTimestamp", occurrence);
+		libraryVersion.setLastUsedTimestamp(value);
+		value = getValue(currentPath + "/status", occurrence);
+		libraryVersion.setStatus(value);
+		LibraryServers servers = new LibraryServers(currentPath + "/servers",
+				occurrence);
+		libraryVersion.setServers(servers);
+		return true;
+	}
+
+	@Override
+	public boolean preVisit(LibraryServer libraryServer) {
+		String currentPath = libraryServer.getPrefix();
+		int occurrence = libraryServer.getOccurrence();
+		String value = getValue(currentPath + "/id", occurrence);
+		libraryServer.setId(Integer.valueOf(value));
+		value = getValue(currentPath + "/status", occurrence);
+		libraryServer.setStatus(value);
+		value = getValue(currentPath + "/lastMessage", occurrence);
+		libraryServer.setLastMessage(value);
+		value = getValue(currentPath + "/lastUpdatedTimestamp", occurrence);
+		libraryServer.setLastUpdatedTimestamp(value);
+		return true;
+	}
+
+	@Override
+	public boolean preVisit(LibraryServers libraryServers) {
+		String currentPath = libraryServers.getPrefix();
+		final int size = getNodesLength(currentPath, "libraryServer",
+				libraryServers.getOccurrence());
+
+		if (size == 0) {
+			return false;
+		}
+
+		final int overallSize = getPreviousNodesLength(currentPath,
+				"libraryServer", libraryServers.getOccurrence());
+
+		List<LibraryServer> servers = new ArrayList<LibraryServer>(size);
+		for (int index = overallSize; index < overallSize + size; index++) {
+			servers.add(new LibraryServer(currentPath + "/libraryServer", index));
+		}
+
+		libraryServers.setServers(servers);
+		return true;
+	}
+
+	@Override
+	public boolean preVisit(LibraryList libraryList) {
+		String currentPath = libraryList.getPrefix();
+		final int size = getNodesLength(currentPath, "libraryInfo",
+				libraryList.getOccurrence());
+
+		if (size == 0) {
+			return false;
+		}
+
+		final int overallSize = getPreviousNodesLength(currentPath,
+				"libraryInfo", libraryList.getOccurrence());
+
+		List<LibraryInfo> infos = new ArrayList<LibraryInfo>(size);
+		for (int index = overallSize; index < overallSize + size; index++) {
+			infos.add(new LibraryInfo(currentPath + "/libraryInfo", index));
+		}
+
+		libraryList.setLibrariesInfo(infos);
+		return true;
+	}
+
+	@Override
+	public boolean preVisit(LibraryVersions libraryVersions) {
+		String currentPath = libraryVersions.getPrefix();
+		final int size = getNodesLength(currentPath, "libraryVersion",
+				libraryVersions.getOccurrence());
+
+		if (size == 0) {
+			return false;
+		}
+
+		final int overallSize = getPreviousNodesLength(currentPath,
+				"libraryVersion", libraryVersions.getOccurrence());
+
+		List<LibraryVersion> versions = new ArrayList<LibraryVersion>(size);
+		for (int index = overallSize; index < overallSize + size; index++) {
+			versions.add(new LibraryVersion(currentPath + "/libraryVersion",
+					index));
+		}
+
+		libraryVersions.setVersions(versions);
+		return true;
+	}
+
+	@Override
+	public boolean preVisit(LibraryInfo libraryInfo) {
+		String currentPath = libraryInfo.getPrefix();
+		int occurrence = libraryInfo.getOccurrence();
+		String value = getValue(currentPath + "/libraryId", occurrence);
+		libraryInfo.setLibraryId(Integer.valueOf(value));
+		value = getValue(currentPath + "/libraryName", occurrence);
+		libraryInfo.setLibraryName(value);
+		value = getValue(currentPath + "/status", occurrence);
+		libraryInfo.setStatus(value);
+		LibraryVersions versions = new LibraryVersions(currentPath
+				+ "/libraryVersions", occurrence);
+		libraryInfo.setLibraryVersions(versions);
+		return true;
+	}
+	
+	@Override
+	public boolean preVisit(LibraryFile libraryFile) {
+		Disposition disposition = representation.getDisposition();
+		if (disposition != null) {
+			libraryFile.setFilename(disposition.getFilename());
+		}
+		int size = (int) representation.getSize();
+		libraryFile.setFileSize(size);
+
+		try {
+			byte[] content = new byte[size];
+			InputStream reader = representation.getStream();
+			int offset = 0;
+			while (offset < size) {
+				offset += reader.read(content, offset, size - offset);
+			}
+			libraryFile.setFileContent(content);
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * @param value
 	 * @return
@@ -1032,6 +1178,12 @@ public class DataDigster extends GenericResponseDataVisitor {
 			return new ProfileRequest();
 		case DEBUG_MODE:
 			return new DebugMode();
+		case LIBRARY_LIST:
+			return new LibraryList();
+		case LIBRARY_INFO:
+			return new LibraryInfo();
+		case LIBRARY_FILE:
+			return new LibraryFile();
 		default:
 			return null;
 		}
@@ -1043,6 +1195,7 @@ public class DataDigster extends GenericResponseDataVisitor {
 		case SERVER_CONFIG:
 		case CODE_TRACE_FILE:
 		case ISSUE_FILE:
+		case LIBRARY_FILE:
 			return representation;
 		default:
 			return new DomRepresentation(representation);

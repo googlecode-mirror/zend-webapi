@@ -21,10 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
+import junit.framework.Assert;
+
 import org.junit.Test;
-import org.restlet.representation.*;
-import org.restlet.engine.io.*;
+import org.restlet.engine.io.BioUtils;
+import org.restlet.representation.Representation;
 import org.zend.webapi.core.WebApiException;
 import org.zend.webapi.core.connection.data.ServerConfig;
 import org.zend.webapi.core.connection.data.ServersList;
@@ -42,8 +43,6 @@ import org.zend.webapi.test.AbstractTestServer;
 import org.zend.webapi.test.Configuration;
 import org.zend.webapi.test.DataUtils;
 import org.zend.webapi.test.server.utils.ServerUtils;
-
-import static org.mockito.Mockito.*;
 
 public class TestServerConfiguration extends AbstractTestServer {
 

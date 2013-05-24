@@ -6,7 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import org.junit.Assert;
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.zend.webapi.core.WebApiException;
 import org.zend.webapi.internal.core.Utils;
