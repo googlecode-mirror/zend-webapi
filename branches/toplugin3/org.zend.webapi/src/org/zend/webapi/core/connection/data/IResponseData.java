@@ -83,7 +83,21 @@ public interface IResponseData {
 
 		GENERAL_DETAILS,
 		
-		DEBUG_MODE
+		DEBUG_MODE,
+		
+		LIBRARY_SERVER,
+		
+		LIBRARY_SERVERS,
+		
+		LIBRARY_VERSION,
+		
+		LIBRARY_VERSIONS,
+		
+		LIBRARY_INFO,
+		
+		LIBRARY_LIST,
+		
+		LIBRARY_FILE
 
 	}
 

@@ -1,16 +1,17 @@
 package org.zend.webapi.test.server.utils;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.IOException;
-import static org.junit.Assert.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.restlet.ext.xml.DomRepresentation;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-import org.restlet.ext.xml.*;
 
 public class ServerUtils {
 

@@ -66,4 +66,14 @@ public interface RequestHandler {
 
 	ServerResponse studioStartProfile();
 
+	ServerResponse libraryGetStatus();
+
+	ServerResponse libraryVersionGetStatus();
+
+	ServerResponse libraryVersionDeploy();
+
+	ServerResponse librarySynchronize();
+
+	ServerResponse downloadLibraryVersionFile();
+
 }

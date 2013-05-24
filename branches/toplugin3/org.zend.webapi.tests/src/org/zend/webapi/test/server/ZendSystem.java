@@ -3,6 +3,7 @@ package org.zend.webapi.test.server;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.zend.webapi.core.connection.data.values.SystemEdition;
+import org.zend.webapi.test.server.response.FileResponse;
 import org.zend.webapi.test.server.response.ServerResponse;
 
 public class ZendSystem {
@@ -12,15 +13,18 @@ public class ZendSystem {
 	private RequestHandler handler;
 
 	private static ZendSystem instance;
+	
+	private SystemEdition edition;
 
-	private ZendSystem() {
+	private ZendSystem(SystemEdition edition) {
 		this.component = new Component();
+		this.edition = edition;
 	}
 
 	public static ZendSystem initializeServer(SystemEdition edition,
 			Protocol protocol, int port, RequestHandler handler) {
 		if (instance == null) {
-			instance = new ZendSystem();
+			instance = new ZendSystem(edition);
 		}
 		instance.handler = handler;
 		instance.prepareServer(protocol, port);
@@ -45,7 +49,7 @@ public class ZendSystem {
 	private void prepareServer(Protocol protocol, int port) {
 		component.getServers().clear();
 		component.getServers().add(protocol, port);
-		component.getDefaultHost().attach(new ServerApplication());
+		component.getDefaultHost().attach(new ServerApplication(edition));
 	}
 
 	public ServerResponse getSystemInfo() {
@@ -170,6 +174,26 @@ public class ZendSystem {
 
 	public ServerResponse studioStartProfile() {
 		return handler.studioStartProfile();
+	}
+
+	public ServerResponse libraryGetStatus() {
+		return handler.libraryGetStatus();
+	}
+
+	public ServerResponse libraryVersionGetStatus() {
+		return handler.libraryVersionGetStatus();
+	}
+
+	public ServerResponse libraryVersionDeploy() {
+		return handler.libraryVersionDeploy();
+	}
+
+	public ServerResponse librarySynchronize() {
+		return handler.librarySynchronize();
+	}
+
+	public ServerResponse downloadLibraryVersionFile() {
+		return handler.downloadLibraryVersionFile();
 	}
 
 }

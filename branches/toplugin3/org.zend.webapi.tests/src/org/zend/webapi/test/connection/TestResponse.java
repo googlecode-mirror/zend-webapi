@@ -3,7 +3,8 @@ package org.zend.webapi.test.connection;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 
-import org.junit.Assert;
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.zend.webapi.core.connection.data.AbstractResponseData;
 import org.zend.webapi.core.connection.data.GenericResponseDataVisitor;
@@ -22,7 +23,7 @@ public class TestResponse {
 	private class SimpleResponseData extends AbstractResponseData {
 
 		public SimpleResponseData(ResponseType type, String prefix) {
-			super(type, prefix);
+			super(type, prefix, prefix.substring(prefix.lastIndexOf('/')));
 		}
 
 		public boolean accept(IResponseDataVisitor visitor) {

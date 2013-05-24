@@ -2,7 +2,8 @@ package org.zend.webapi.test.core;
 
 import java.io.IOException;
 
-import org.junit.Assert;
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.restlet.data.MediaType;
 import org.restlet.ext.xml.DomRepresentation;
