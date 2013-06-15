@@ -39,6 +39,8 @@ public enum ResponseCode {
 
 	MALFORMED_REQUEST(400, "malformedRequest", "The server is unable to understand the request"),
 
+	UNMET_DEPENDENCY(400, "unmetDependency", "One of specified dependecies is not satisfied."),
+	
 	AUTH_ERROR(401, "authError", "Authentication error, unknown key or invalid request signature"),
 
 	INSUFFICIENT_ACCESS_LEVEL(401, "insufficientAccessLevel",
@@ -81,6 +83,12 @@ public enum ResponseCode {
 			"applicationConflict",
 			"Provided application package includes a different application, and not a different version of the existing application"),
 
+	LIBRARY_CONFLICT(
+			409,
+			"libraryAlreadyExists",
+			"Could not deploy library: Library with the same name and version already exists"),
+	
+			
 	SERVER_NOT_CONFIGURED(
 			500,
 			"serverNotConfigured",
