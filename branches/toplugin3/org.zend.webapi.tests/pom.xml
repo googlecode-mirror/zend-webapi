@@ -30,6 +30,8 @@
 					</bundleStartLevel>
 					<testSuite>org.zend.webapi.tests</testSuite>
       				<testClass>org.zend.webapi.test.AllTests</testClass>
+      				<forkedProcessTimeoutInSeconds>300</forkedProcessTimeoutInSeconds>
+      				<testFailureIgnore>true</testFailureIgnore>
 				</configuration>
 			</plugin>
 			<plugin>
