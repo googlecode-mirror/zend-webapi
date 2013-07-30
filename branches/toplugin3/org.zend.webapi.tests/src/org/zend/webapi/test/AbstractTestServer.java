@@ -35,7 +35,7 @@ public abstract class AbstractTestServer {
 				URI uri = new URI(Configuration.getHost());
 				ZendSystem server = ZendSystem.initializeServer(
 						Configuration.getEdition(),
-						new Protocol(uri.getScheme()), uri.getPort(), handler);
+						getProtocol(uri.getScheme()), uri.getPort(), handler);
 				server.startServer();
 			} catch (URISyntaxException e) {
 				fail("Incorrect host address: " + Configuration.getHost());
@@ -93,6 +93,13 @@ public abstract class AbstractTestServer {
 				fail(e.getMessage());
 			}
 		}
+	}
+	
+	private Protocol getProtocol(String host) {
+		if (host.startsWith("https")) {
+			return Protocol.HTTPS;
+		}
+		return Protocol.HTTP;
 	}
 
 }
