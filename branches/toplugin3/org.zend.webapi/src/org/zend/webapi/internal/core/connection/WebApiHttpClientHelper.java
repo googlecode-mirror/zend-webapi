@@ -37,8 +37,8 @@ public class WebApiHttpClientHelper extends HttpClientHelper {
 				getOutboundMessages().add(response);
 				getController().wakeup();
 
-				long timeout = 20000;//(Long) request.getAttributes().get(
-						//IRequest.TIMEOUT);
+				long timeout = (Long) request.getAttributes().get(
+						IRequest.TIMEOUT);
 				// Await on the latch
 				if (!latch.await(timeout, TimeUnit.MILLISECONDS)) {
 					// Timeout detected

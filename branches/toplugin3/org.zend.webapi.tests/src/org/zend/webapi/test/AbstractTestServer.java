@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -56,6 +57,7 @@ public abstract class AbstractTestServer {
 						+ Configuration.getHost());
 			}
 		}
+		Configuration.clean();
 	}
 
 	protected void initMock(ServerResponse toMock, String operation,
@@ -94,7 +96,7 @@ public abstract class AbstractTestServer {
 			}
 		}
 	}
-	
+
 	private Protocol getProtocol(String host) {
 		if (host.startsWith("https")) {
 			return Protocol.HTTPS;
