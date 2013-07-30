@@ -43,13 +43,9 @@ public class ServerApplication extends Application {
 			break;
 		}
 	}
+	
 	@Override
 	public Restlet createInboundRoot() {
-		return createRoot();
-	}
-
-	@Override
-	public Restlet createOutboundRoot() {
 		return createRoot();
 	}
 

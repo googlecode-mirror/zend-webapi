@@ -21,7 +21,6 @@ import org.zend.webapi.core.connection.request.RequestParameter;
 import org.zend.webapi.core.service.WebApiMethodType;
 import org.zend.webapi.internal.core.connection.request.ConfigurationImportRequest;
 import org.zend.webapi.internal.core.connection.request.GetSystemInfoRequest;
-import org.zend.webapi.internal.core.connection.request.HeaderParameters;
 
 public class TestRequest {
 
@@ -51,27 +50,6 @@ public class TestRequest {
 						ServerType.ZEND_SERVER_MANAGER);
 
 		Assert.assertNull(request.getContentType());
-	}
-
-	@Test
-	public void testHeaderParameters() {
-		HeaderParameters headerParameters = new HeaderParameters();
-		List<Parameter> params = new ArrayList<Parameter>();
-		for (int i = 0; i < 5; i++) {
-			Parameter p = headerParameters.createEntry(String.valueOf(i),
-					"test");
-			Assert.assertNotNull(p);
-			params.add(p);
-		}
-		Series<Parameter> series = headerParameters.createSeries(params);
-		Assert.assertNotNull(series);
-	}
-
-	@Test
-	public void testHeaderParametersNull() {
-		HeaderParameters headerParameters = new HeaderParameters();
-		Series<Parameter> series = headerParameters.createSeries(null);
-		Assert.assertNull(series);
 	}
 
 	@Test(expected = IllegalStateException.class)
