@@ -13,7 +13,7 @@ public class ZendSystem {
 	private RequestHandler handler;
 
 	private static ZendSystem instance;
-	
+
 	private SystemEdition edition;
 
 	private ZendSystem(SystemEdition edition) {
@@ -23,9 +23,7 @@ public class ZendSystem {
 
 	public static ZendSystem initializeServer(SystemEdition edition,
 			Protocol protocol, int port, RequestHandler handler) {
-		if (instance == null) {
-			instance = new ZendSystem(edition);
-		}
+		instance = new ZendSystem(edition);
 		instance.handler = handler;
 		instance.prepareServer(protocol, port);
 		return instance;

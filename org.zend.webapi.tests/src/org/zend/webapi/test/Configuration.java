@@ -12,8 +12,13 @@ import static org.junit.Assert.fail;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 import org.zend.webapi.core.WebApiClient;
@@ -61,10 +66,14 @@ public class Configuration {
 		return webApiClient;
 	}
 
+	public static void clean() {
+		webApiClient = null;
+	}
+
 	public static ServerType getType() {
 		return type;
 	}
-	
+
 	public static SystemEdition getEdition() {
 		return edition;
 	}
@@ -102,6 +111,20 @@ public class Configuration {
 		}
 		type = ServerType.byType((String) p.get("serverType"));
 		host = (String) p.get("host");
+		try {
+			URI uri = new URI(host);
+			int port = uri.getPort();
+			while (!available(port)) {
+				port++;
+			}
+			host = new URL(uri.getScheme(), uri.getHost(), port, "").toString();
+			System.out.println(host);
+		} catch (URISyntaxException e) {
+			fail(e.getMessage());
+		} catch (MalformedURLException e) {
+			fail(e.getMessage());
+		}
+
 		edition = SystemEdition.byName((String) p.getProperty("systemEdition"));
 
 		if (type == null || host == null) {
@@ -111,6 +134,32 @@ public class Configuration {
 			fail("Incorrect server type. Allowed values are EXTERNAL or EMBEDDED.");
 		}
 		return credentials;
+	}
+
+	private static boolean available(int port) {
+		System.out.println("--------------Testing port " + port);
+		Socket s = null;
+		try {
+			s = new Socket("localhost", port);
+
+			// If the code makes it this far without an exception it means
+			// something is using the port and has responded.
+			System.out.println("--------------Port " + port
+					+ " is not available");
+			return false;
+		} catch (IOException e) {
+			System.out.println("--------------Port " + port + " is available");
+			return true;
+		} finally {
+			if (s != null) {
+				try {
+					s.close();
+				} catch (IOException e) {
+					throw new RuntimeException("You should handle this error.",
+							e);
+				}
+			}
+		}
 	}
 
 }
