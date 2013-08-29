@@ -54,6 +54,7 @@ import org.zend.webapi.core.progress.IChangeNotifier;
 import org.zend.webapi.core.service.IRequestListener;
 import org.zend.webapi.core.service.WebApiMethodType;
 import org.zend.webapi.internal.core.Utils;
+import org.zend.webapi.internal.core.SSLPatch;
 import org.zend.webapi.internal.core.connection.ServiceDispatcher;
 import org.zend.webapi.internal.core.connection.WebApiEngine;
 import org.zend.webapi.internal.core.connection.request.ApplicationDeployRequest;
