@@ -1,6 +1,7 @@
-package org.zend.webapi.internal.core.connection;
+package org.zend.webapi.internal.core;
 
 import java.security.cert.X509Certificate;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
