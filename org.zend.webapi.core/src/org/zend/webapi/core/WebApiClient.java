@@ -165,6 +165,12 @@ public class WebApiClient {
 		this.credentials = credentials;
 		this.clientConfiguration = clientConfiguration;
 		this.context = ctx;
+		try {
+			SSLPatch.disableSSLCertValidation();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (engine == null) {
 			engine = new WebApiEngine();
 			Engine.setInstance(engine);
