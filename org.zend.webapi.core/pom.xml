@@ -24,6 +24,18 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.ssl</artifactId>
+            <version>2.0.4</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.net</artifactId>
+            <version>2.0.4</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
             <version>4.0.0</version>
